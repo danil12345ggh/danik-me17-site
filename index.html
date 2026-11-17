@@ -4,11 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#060b10">
-  <meta name="description" content="Danik_me17 — все мои ссылки в одном месте: Telegram, Steam, Discord и Instagram.">
+  <meta name="description" content="Danik_me17 — анимированный портал в мой мир. Telegram, Steam, Discord и Instagram.">
   <meta property="og:title" content="Danik_me17 · My World">
   <meta property="og:description" content="Welcome to my world. Telegram · Steam · Discord · Instagram">
   <meta property="og:type" content="website">
-  <title>Danik_me17 — My World</title>
+  <title>Danik_me17 — Animated Portal</title>
   <style>
     :root{--bg:#050a10;--panel:rgba(10,17,25,.76);--panel2:rgba(9,19,28,.66);--line:rgba(141,222,229,.17);--mint:#a3f4ec;--cyan:#5ad9d8;--glow:#25baba;--ink:#ecf8f9;--sub:#96abb7;--muted:#66808a}
     *{box-sizing:border-box}
@@ -85,6 +85,46 @@
     @keyframes spin{to{transform:rotate(360deg)}}
     @keyframes ambient{to{transform:translate3d(5%,-3%,0) rotate(7deg)}}
     @keyframes introBreath{50%{transform:scale(1.07);opacity:.65}}
+
+    /* CINEMATIC PORTAL: animated intro transition, mobile-friendly */
+    .entry-inner,.entry-hint{will-change:transform,opacity}
+    .transitioning .entry-inner{animation:entryVanish .65s cubic-bezier(.3,0,.72,.99) both}
+    .transitioning .entry-hint{animation:hintVanish .28s ease forwards}
+    .transitioning .entry:before{animation:entryCircleBurst .85s cubic-bezier(.2,.7,.35,1) both}
+    .portal-transition{position:fixed;inset:0;z-index:24;pointer-events:none;display:grid;place-items:center;opacity:0;visibility:hidden;overflow:hidden;isolation:isolate}
+    .portal-transition:before{content:"";position:absolute;inset:-20%;background:radial-gradient(circle at center,rgba(114,255,242,.58) 0%,rgba(34,161,172,.38) 13%,rgba(4,16,29,.95) 39%,rgba(2,8,14,.98) 100%);opacity:0;transform:scale(.2)}
+    .portal-transition:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0,transparent 8px,rgba(178,255,247,.04) 9px,transparent 10px);opacity:0}
+    .portal-ring{position:absolute;width:160px;aspect-ratio:1;border-radius:50%;border:2px solid rgba(175,255,245,.85);box-shadow:0 0 25px rgba(88,249,239,.55),inset 0 0 25px rgba(88,249,239,.35),0 0 0 1px rgba(4,11,17,.75);opacity:0;transform:scale(.1)}
+    .portal-ring.two{border-width:1px;border-style:dashed;box-shadow:0 0 22px rgba(95,222,224,.22)}
+    .portal-glyph{position:relative;z-index:1;font:80px/1 Georgia,serif;color:#d6fffa;text-shadow:0 0 30px rgba(148,255,243,.85),0 0 75px rgba(57,236,228,.6);opacity:0;transform:scale(.45)}
+    .portal-flash{position:absolute;width:100vmax;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(211,255,252,.9),rgba(75,251,234,.4) 17%,transparent 48%);opacity:0;transform:scale(.1);mix-blend-mode:screen}
+    .transitioning .portal-transition{visibility:visible;animation:portalVisibility 1.8s linear forwards}
+    .transitioning .portal-transition:before{animation:portalBackdrop 1.8s ease-in-out forwards}
+    .transitioning .portal-transition:after{animation:portalScan 1.8s linear forwards}
+    .transitioning .portal-ring.one{animation:portalRing 1.45s cubic-bezier(.12,.65,.3,1) forwards}
+    .transitioning .portal-ring.two{animation:portalRing 1.55s .12s cubic-bezier(.12,.65,.3,1) forwards}
+    .transitioning .portal-glyph{animation:portalLetter 1.5s ease-out forwards}
+    .transitioning .portal-flash{animation:portalFlash 1.8s ease-out forwards}
+    .entered .layout{animation:profileMaterialize 1.06s .1s cubic-bezier(.16,1,.26,1) backwards}
+    .entered .profile .avatar-wrap{animation:avatarMaterialize .88s .37s cubic-bezier(.13,1.2,.35,1) backwards}
+    .entered .social{animation:linkMaterialize .63s cubic-bezier(.18,.86,.25,1) backwards}
+    .entered .social:nth-child(1){animation-delay:.45s}
+    .entered .social:nth-child(2){animation-delay:.53s}
+    .entered .social:nth-child(3){animation-delay:.61s}
+    .entered .social:nth-child(4){animation-delay:.69s}
+    .entered .music-player{animation:linkMaterialize .62s .8s ease-out backwards}
+    @keyframes entryVanish{0%{transform:scale(1);opacity:1;filter:blur(0)}55%{transform:scale(1.075);opacity:.95}100%{transform:scale(1.32);opacity:0;filter:blur(15px)}}
+    @keyframes hintVanish{to{opacity:0;transform:translateY(12px)}}
+    @keyframes entryCircleBurst{0%{transform:scale(1);opacity:1}100%{transform:scale(2.5);opacity:0}}
+    @keyframes portalVisibility{0%{opacity:0}9%{opacity:1}78%{opacity:1}100%{opacity:0}}
+    @keyframes portalBackdrop{0%,18%{opacity:0;transform:scale(.1)}39%{opacity:1;transform:scale(2)}65%{opacity:1;transform:scale(3.1)}100%{opacity:0;transform:scale(5)}}
+    @keyframes portalScan{0%,20%,80%{opacity:0}35%{opacity:.5}55%{opacity:.15}100%{opacity:0}}
+    @keyframes portalRing{0%{opacity:0;transform:scale(.25) rotate(0deg)}17%{opacity:1}66%{opacity:.9}100%{opacity:0;transform:scale(13) rotate(40deg)}}
+    @keyframes portalLetter{0%,16%{opacity:0;transform:scale(.4)}31%{opacity:1;transform:scale(1)}55%{opacity:1;transform:scale(1.1)}82%,100%{opacity:0;transform:scale(2.4);filter:blur(8px)}}
+    @keyframes portalFlash{0%,33%{opacity:0;transform:scale(.1)}48%{opacity:.65;transform:scale(1.35)}66%,100%{opacity:0;transform:scale(2.2)}}
+    @keyframes profileMaterialize{0%{opacity:0;transform:translateY(45px) scale(.91);filter:blur(14px)}65%{opacity:1;filter:blur(0)}100%{transform:translateY(0) scale(1);opacity:1}}
+    @keyframes avatarMaterialize{0%{opacity:0;transform:scale(.55) rotate(-18deg)}100%{opacity:1;transform:scale(1) rotate(0)}}
+    @keyframes linkMaterialize{0%{opacity:0;transform:translateY(25px)}100%{opacity:1;transform:translateY(0)}}
     @media(max-width:530px){.topbar{padding:23px 24px}.topbar-right{font-size:9px}.page{padding:90px 19px 80px}.layout::before{inset:-10px;border-radius:34px}.card{padding:25px 21px 25px;border-radius:24px}.avatar-wrap{width:100px;height:100px}.avatar{width:94px;height:94px}.avatar span{font-size:63px}.name{font-size:34px}.social{min-height:63px}.kicker{font-size:14px}.footer{bottom:20px}}
     @media(max-width:360px){.topbar-right{display:none}.card{padding:22px 16px}.social{gap:10px;padding:10px}.social-sub{font-size:10px}.name{font-size:30px}}
     @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}#stars{display:none}}
@@ -102,10 +142,16 @@
       <h1 class="entry-head">Danik_me17</h1>
       <p class="entry-note">У каждого свой мир. Добро пожаловать в мой.</p>
       <button type="button" class="enter-button" id="enterButton">ВОЙТИ ↗</button>
-      <p class="entry-note">♫ Музыка начнёт играть после входа</p>
       <p class="entry-music-note">♫ При входе заиграет тихая мелодия</p>
     </div>
     <span class="entry-hint">✦ CLICK ANYWHERE TO ENTER ✦</span>
+  </div>
+
+  <div class="portal-transition" aria-hidden="true">
+    <span class="portal-ring one"></span>
+    <span class="portal-ring two"></span>
+    <span class="portal-flash"></span>
+    <span class="portal-glyph">𝕯</span>
   </div>
 
   <div class="site" id="site">
@@ -183,7 +229,20 @@
         if(play){ambientAudio.play().then(syncMusicUI).catch(()=>{syncMusicUI();showToast('Музыка не включилась. Нажми ♫ ВКЛ');});}
         else{ambientAudio.pause();syncMusicUI();}
       }
-      const enter=()=>{if(root.classList.contains('entered'))return;root.classList.add('entered');entry.setAttribute('aria-hidden','true');entry.setAttribute('inert','');setMusic(true);};
+      let entering=false;
+      const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const enter=()=>{
+        if(entering||root.classList.contains('entered'))return;
+        entering=true;
+        // Start audio on the user's actual click; mobile browsers require user activation.
+        setMusic(true);
+        entry.setAttribute('aria-hidden','true');
+        entry.setAttribute('inert','');
+        if(reduceMotion){root.classList.add('entered');return;}
+        root.classList.add('transitioning');
+        window.setTimeout(()=>root.classList.add('entered'),660);
+        window.setTimeout(()=>root.classList.remove('transitioning'),1850);
+      };
       entry.addEventListener('click',enter);
       enterButton.addEventListener('click',e=>{e.stopPropagation();enter();});
       document.addEventListener('keydown',e=>{if(!root.classList.contains('entered')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();enter();}});
