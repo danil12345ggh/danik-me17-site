@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#060b10">
+  <meta name="description" content="Danik_me17 — все мои ссылки в одном месте: Telegram, Steam, Discord и Instagram.">
+  <meta property="og:title" content="Danik_me17 · My World">
+  <meta property="og:description" content="Welcome to my world. Telegram · Steam · Discord · Instagram">
+  <meta property="og:type" content="website">
+  <title>Danik_me17 — My World</title>
+  <style>
+    :root{--bg:#050a10;--panel:rgba(10,17,25,.76);--panel2:rgba(9,19,28,.66);--line:rgba(141,222,229,.17);--mint:#a3f4ec;--cyan:#5ad9d8;--glow:#25baba;--ink:#ecf8f9;--sub:#96abb7;--muted:#66808a}
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:var(--bg)}
+    body{min-height:100svh;overflow-x:hidden}
+    button,a{-webkit-tap-highlight-color:transparent}
+    button{font:inherit}
+    a:focus-visible,button:focus-visible{outline:2px solid var(--mint);outline-offset:4px}
+    .background{position:fixed;inset:0;z-index:-3;overflow:hidden;pointer-events:none;background:radial-gradient(ellipse at 48% 62%,#122a35 0%,#07131e 40%,#03070c 84%)}
+    .background:before{content:"";position:absolute;inset:-20%;background:radial-gradient(ellipse 35% 34% at 24% 22%,rgba(40,186,183,.20),transparent 80%),radial-gradient(ellipse 32% 30% at 78% 79%,rgba(19,91,148,.22),transparent 80%);filter:blur(38px);animation:ambient 14s ease-in-out infinite alternate}
+    .background:after{content:"";position:absolute;inset:0;background:linear-gradient(160deg,rgba(0,0,0,.14),transparent 45%,rgba(0,0,0,.42)),repeating-linear-gradient(0deg,rgba(208,254,255,.012) 0px,rgba(208,254,255,.012) 1px,transparent 1px,transparent 5px)}
+    .orb{position:absolute;border:1px solid rgba(151,253,241,.11);border-radius:50%;filter:drop-shadow(0 0 28px rgba(43,255,230,.1))}
+    .orb.a{width:620px;height:620px;top:-340px;right:-200px;transform:rotate(29deg)}
+    .orb.b{width:680px;height:680px;bottom:-440px;left:-270px}
+    .grid-lines{position:absolute;inset:0;background-image:linear-gradient(to right,rgba(148,251,244,.035) 1px,transparent 1px),linear-gradient(to bottom,rgba(148,251,244,.035) 1px,transparent 1px);background-size:68px 68px;mask-image:linear-gradient(to bottom,transparent 0%,black 34%,black 70%,transparent)}
+    #stars{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:.68}
+    .topbar{position:absolute;left:0;right:0;top:0;display:flex;align-items:center;justify-content:space-between;padding:28px clamp(24px,6vw,85px);font-size:10px;letter-spacing:.3em;font-weight:700;color:rgba(208,254,255,.58);z-index:1}
+    .brand{display:flex;align-items:center;gap:12px}.brand-symbol{width:25px;height:25px;display:grid;place-items:center;border:1px solid rgba(143,239,238,.42);transform:rotate(45deg);box-shadow:0 0 15px rgba(54,184,184,.12)}.brand-symbol span{transform:rotate(-45deg);font-size:15px;font-family:Georgia,serif;letter-spacing:0;color:#d0fffa}.topbar-right{letter-spacing:.14em;color:var(--muted)}
+    .page{min-height:100svh;display:grid;place-items:center;padding:100px 22px 76px;position:relative;isolation:isolate}
+    .layout{width:min(100%,500px);position:relative;filter:drop-shadow(0 18px 55px rgba(0,0,0,.45))}
+    .layout::before{content:"";position:absolute;inset:-24px;border:1px solid rgba(130,240,234,.075);border-radius:39px;pointer-events:none}
+    .card{position:relative;overflow:hidden;padding:33px 34px 30px;border:1px solid rgba(162,248,238,.23);border-radius:28px;box-shadow:inset 0 1px rgba(241,255,255,.12),0 0 0 1px rgba(0,0,0,.13),0 18px 90px rgba(0,0,0,.35),0 0 85px rgba(48,197,204,.08);background:linear-gradient(155deg,rgba(27,45,58,.8),rgba(5,12,20,.91) 50%,rgba(5,15,24,.85));backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+    .card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% -16%,rgba(99,229,220,.21),transparent 48%);pointer-events:none}
+    .card:after{content:"";position:absolute;left:8%;right:8%;top:0;height:1px;background:linear-gradient(90deg,transparent,#b4fff5,transparent);opacity:.77}
+    .status-bar{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px;font-size:9px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--sub)}
+    .status-bar .serial{opacity:.5;font-variant-numeric:tabular-nums}.status{display:flex;align-items:center;gap:9px}.status-dot{width:7px;height:7px;flex:none;background:#7efbe9;border-radius:50%;box-shadow:0 0 0 4px rgba(84,244,228,.09),0 0 16px rgba(108,255,234,.55);animation:pulse 2.5s ease-in-out infinite}
+    .profile{text-align:center;position:relative;padding-top:20px}
+    .avatar-wrap{margin:0 auto 18px;position:relative;width:110px;height:110px;display:grid;place-items:center}
+    .avatar-wrap:before,.avatar-wrap:after{content:"";position:absolute;inset:-8px;border:1px solid rgba(120,235,232,.30);border-radius:50%}.avatar-wrap:before{border-top-color:#83fff0;border-bottom-color:transparent;animation:spin 14s linear infinite}.avatar-wrap:after{inset:-15px;border-style:dashed;border-color:rgba(145,245,240,.13);animation:spin 24s linear reverse infinite}
+    .avatar{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;border:2px solid rgba(175,253,240,.4);background:radial-gradient(circle at 34% 25%,#204451 0%,#102532 43%,#061018 75%);box-shadow:0 0 32px rgba(71,224,222,.22),inset 0 0 32px rgba(30,203,206,.12);overflow:hidden}
+    .avatar span{font-family:Georgia,"Times New Roman",serif;font-size:68px;color:#c6fff7;text-shadow:0 0 20px rgba(101,242,236,.56);margin-top:-5px;line-height:1}
+    .name{font-size:clamp(29px,6.5vw,43px);line-height:1.15;letter-spacing:-.045em;font-weight:800;margin:8px 0 10px;text-shadow:0 0 28px rgba(89,239,238,.12)}
+    .name .me{color:var(--mint)}
+    .name-check{display:inline-flex;vertical-align:middle;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:linear-gradient(140deg,#83e4e5,#3ca1ae);color:#031016;margin-left:6px;transform:translateY(-5px);font-size:11px;font-weight:900;letter-spacing:0}
+    .kicker{margin:0;font-family:Georgia,"Times New Roman",serif;color:#b5ebe6;letter-spacing:.075em;font-style:italic;font-size:15px;line-height:1.6}
+    .bio{font-size:12px;color:var(--sub);line-height:1.7;max-width:330px;margin:10px auto 0}
+    .divider{display:flex;align-items:center;justify-content:center;gap:13px;margin:25px 0 18px;color:rgba(155,241,230,.6);font-family:Georgia,serif;font-size:13px}.divider:before,.divider:after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(156,239,234,.25))}.divider:after{transform:rotate(180deg)}
+    .links-label{display:flex;justify-content:space-between;align-items:center;color:rgba(200,231,231,.56);font-size:10px;letter-spacing:.23em;text-transform:uppercase;font-weight:700;margin-bottom:12px}.links-label span:last-child{font-variant-numeric:tabular-nums;letter-spacing:.12em}
+    .socials{display:grid;gap:11px;position:relative}
+    .social{color:var(--ink);text-decoration:none;min-height:67px;border:1px solid rgba(141,233,231,.14);background:linear-gradient(110deg,rgba(112,211,216,.065),rgba(255,255,255,.012));border-radius:14px;display:flex;align-items:center;gap:14px;padding:12px 14px;transition:border-color .25s,background .25s,transform .25s,box-shadow .25s;position:relative;overflow:hidden}
+    .social:before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 20%,rgba(156,253,244,.065),transparent 80%);transform:translateX(-110%);transition:transform .55s}
+    .social:hover{transform:translateY(-3px);background:linear-gradient(110deg,rgba(107,214,218,.13),rgba(255,255,255,.025));border-color:rgba(139,245,239,.48);box-shadow:0 9px 26px rgba(0,0,0,.2),0 0 20px rgba(59,205,207,.08)}.social:hover:before{transform:translateX(110%)}
+    .icon-box{height:40px;width:40px;flex:none;border:1px solid rgba(131,229,225,.13);border-radius:11px;display:grid;place-items:center;color:#affaf2;background:rgba(99,205,209,.055)}.icon-box svg{width:22px;height:22px;display:block;fill:currentColor}
+    .social-text{min-width:0;flex:1}.social-name{display:block;font-weight:720;font-size:13px;letter-spacing:.014em}.social-sub{display:block;color:#83a5af;margin-top:4px;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.arrow{color:#71c6c7;opacity:.72;transition:transform .25s;font-size:20px;font-weight:300}.social:hover .arrow{transform:translate(3px,-3px);opacity:1}
+    .music-player{display:flex;align-items:center;gap:12px;margin-top:18px;padding:11px 12px;border:1px solid rgba(141,233,231,.19);background:linear-gradient(110deg,rgba(54,143,152,.13),rgba(5,12,22,.28));border-radius:14px}
+    .music-disc{width:40px;height:40px;border-radius:11px;display:flex;justify-content:center;align-items:center;gap:3px;flex:none;background:radial-gradient(circle at 30% 20%,rgba(115,248,237,.20),rgba(40,108,128,.12));border:1px solid rgba(140,245,237,.19)}
+    .music-disc i{display:block;height:8px;width:3px;border-radius:3px;background:#b0fff4;opacity:.65}
+    .music-player.is-playing .music-disc i{animation:equalizer 1s ease-in-out infinite alternate;opacity:1}
+    .music-player.is-playing .music-disc i:nth-child(2){animation-delay:-.45s}.music-player.is-playing .music-disc i:nth-child(3){animation-delay:-.8s}.music-player.is-playing .music-disc i:nth-child(4){animation-delay:-.25s}
+    .music-meta{min-width:0;flex:1}.music-title{display:block;color:#e4fffb;font-weight:700;font-size:12px}.music-sub{display:block;font-size:10px;color:#86aeb7;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .music-toggle{cursor:pointer;flex:none;min-width:75px;padding:9px 11px;border-radius:10px;color:#c8f7f1;background:rgba(73,173,180,.13);border:1px solid rgba(141,233,231,.23);font-size:11px;font-weight:700;transition:background .2s,border-color .2s}.music-toggle:hover{background:rgba(73,173,180,.25);border-color:rgba(141,233,231,.52)}
+    .entry-music-note{margin:-2px 0 0;color:#7aa6ad;font-size:11px;letter-spacing:.05em}
+    @keyframes equalizer{0%{height:6px}50%{height:17px}100%{height:10px}}
+    .copy-area{display:flex;justify-content:center;margin-top:20px}.copy-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid rgba(130,235,230,.14);color:#9ac5cb;background:rgba(94,172,184,.05);border-radius:40px;font-size:11px;padding:9px 14px;cursor:pointer;transition:color .2s,background .2s,border-color .2s}.copy-btn:hover{color:#e0fffc;background:rgba(94,201,206,.14);border-color:rgba(130,235,230,.3)}.copy-btn svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.7}
+    .below-card{display:flex;align-items:center;justify-content:center;text-align:center;gap:13px;color:rgba(145,179,189,.55);font-size:10px;letter-spacing:.2em;text-transform:uppercase;margin:27px auto 0}.below-card i{width:23px;height:1px;background:rgba(156,239,234,.22)}
+    .footer{position:absolute;bottom:23px;left:16px;right:16px;text-align:center;font-size:10px;color:rgba(137,161,170,.56);letter-spacing:.18em}
+    .entry{display:none;position:fixed;inset:0;z-index:20;align-items:center;justify-content:center;flex-direction:column;text-align:center;background:radial-gradient(ellipse at 50% 46%,#122a33 0%,#07141d 38%,#03080d 83%);padding:24px;cursor:pointer;overflow:hidden;transition:opacity .7s ease,visibility .7s ease}
+    .entry:before{content:"";position:absolute;width:min(76vw,550px);aspect-ratio:1;border-radius:50%;border:1px solid rgba(137,242,229,.12);box-shadow:0 0 0 38px rgba(154,236,238,.015),0 0 0 95px rgba(154,236,238,.008),0 0 90px rgba(53,193,204,.12);animation:introBreath 5s ease-in-out infinite}
+    .entry-inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:16px}
+    .entry-glyph{font-family:Georgia,serif;font-size:80px;line-height:1;color:#b6fff7;text-shadow:0 0 55px rgba(64,240,233,.55)}
+    .entry-small{font-size:10px;letter-spacing:.4em;color:#6eabb3;font-weight:700;text-transform:uppercase}
+    .entry-head{font-size:clamp(26px,5vw,41px);font-weight:750;letter-spacing:-.045em;margin:0;color:#f1fffd}
+    .entry-note{font-size:12px;color:#8fb1ba;line-height:1.6;margin:0;max-width:320px}
+    .enter-button{margin-top:14px;cursor:pointer;border:1px solid rgba(129,249,236,.55);background:linear-gradient(110deg,rgba(81,221,213,.19),rgba(46,126,144,.17));border-radius:50px;color:#dbfffc;padding:14px 27px;font-size:11px;font-weight:800;letter-spacing:.26em;box-shadow:0 0 30px rgba(43,213,211,.12);transition:transform .2s,box-shadow .2s,background .2s}
+    .enter-button:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(43,213,211,.23);background:rgba(55,188,184,.2)}
+    .entry-hint{position:absolute;bottom:38px;font-size:10px;letter-spacing:.15em;color:#648994}
+    .js .entry{display:flex}
+    .js:not(.entered) .site{opacity:0;transform:translateY(18px) scale(.975);pointer-events:none}
+    .site{transition:opacity .9s ease,transform .9s ease;opacity:1;transform:translateY(0) scale(1)}
+    .entered .entry{opacity:0;visibility:hidden;pointer-events:none}
+    .toast{position:fixed;z-index:25;left:50%;bottom:35px;transform:translate(-50%,25px);color:#d9fffa;background:#163139;border:1px solid rgba(123,247,233,.38);border-radius:40px;padding:12px 20px;font-size:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;pointer-events:none;transition:.3s;white-space:nowrap}
+    .toast.show{transform:translate(-50%,0);opacity:1}
+    @keyframes pulse{50%{box-shadow:0 0 0 6px rgba(84,244,228,.035),0 0 22px rgba(108,255,234,.7)}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    @keyframes ambient{to{transform:translate3d(5%,-3%,0) rotate(7deg)}}
+    @keyframes introBreath{50%{transform:scale(1.07);opacity:.65}}
+    @media(max-width:530px){.topbar{padding:23px 24px}.topbar-right{font-size:9px}.page{padding:90px 19px 80px}.layout::before{inset:-10px;border-radius:34px}.card{padding:25px 21px 25px;border-radius:24px}.avatar-wrap{width:100px;height:100px}.avatar{width:94px;height:94px}.avatar span{font-size:63px}.name{font-size:34px}.social{min-height:63px}.kicker{font-size:14px}.footer{bottom:20px}}
+    @media(max-width:360px){.topbar-right{display:none}.card{padding:22px 16px}.social{gap:10px;padding:10px}.social-sub{font-size:10px}.name{font-size:30px}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}#stars{display:none}}
+  </style>
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+  <div class="background" aria-hidden="true"><div class="grid-lines"></div><div class="orb a"></div><div class="orb b"></div></div>
+  <canvas id="stars" aria-hidden="true"></canvas>
+
+  <div class="entry" id="entry" role="dialog" aria-modal="true" aria-label="Вход на персональную страницу">
+    <div class="entry-inner">
+      <div class="entry-glyph" aria-hidden="true">𝕯</div>
+      <div class="entry-small">you found my world</div>
+      <h1 class="entry-head">Danik_me17</h1>
+      <p class="entry-note">У каждого свой мир. Добро пожаловать в мой.</p>
+      <button type="button" class="enter-button" id="enterButton">ВОЙТИ ↗</button>
+      <p class="entry-note">♫ Музыка начнёт играть после входа</p>
+      <p class="entry-music-note">♫ При входе заиграет тихая мелодия</p>
+    </div>
+    <span class="entry-hint">✦ CLICK ANYWHERE TO ENTER ✦</span>
+  </div>
+
+  <div class="site" id="site">
+    <header class="topbar">
+      <div class="brand"><span class="brand-symbol"><span>𝕯</span></span><span>DANIK / WORLD</span></div>
+      <div class="topbar-right">EST. 2026 &nbsp; ✦ &nbsp; ONLINE</div>
+    </header>
+
+    <main class="page">
+      <div class="layout">
+        <section class="card" aria-label="Профиль Danik_me17">
+          <div class="status-bar"><span class="status"><span class="status-dot"></span>MY PERSONAL SPACE</span><span class="serial">№ 001 / DANIK</span></div>
+          <div class="profile">
+            <div class="avatar-wrap" aria-label="Аватар с буквой D"><div class="avatar"><span>𝕯</span></div></div>
+            <h1 class="name">Danik<span class="me">_me17</span><span class="name-check" title="Декоративный значок" aria-hidden="true">✦</span></h1>
+            <p class="kicker">𓆩 🖤 𝕸𝖞 𝕷𝖎𝖋𝖊 · 𝕸𝖞 𝖂𝖔𝖗𝖑𝖉 𓆪</p>
+            <p class="bio">Немного загадочности, немного хаоса.<br>Мой мир — мои правила.</p>
+          </div>
+          <div class="divider" aria-hidden="true">✧</div>
+          <div class="links-label"><span>МОИ СОЦСЕТИ</span><span>01 — 04</span></div>
+          <nav class="socials" aria-label="Социальные сети">
+            <a class="social" href="https://t.me/Danik_me17" target="_blank" rel="noopener noreferrer" aria-label="Открыть Telegram Danik_me17">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21.9 4.7c.3-1.2-.5-1.7-1.6-1.3L2.8 10.2c-1.2.5-1.1 1.2-.2 1.5l4.5 1.4 1.7 5.2c.2.6.1.8.8.8.5 0 .8-.2 1.1-.6l2.2-2.2 4.6 3.4c.8.5 1.4.3 1.6-.8L21.9 4.7ZM8 12.8 18.7 6c.5-.3 1-.1.6.3l-8.8 8.1-.3 3.3L8 12.8Z"/></svg></span>
+              <span class="social-text"><span class="social-name">Telegram</span><span class="social-sub">@Danik_me17</span></span><span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="social" href="https://steamcommunity.com/profiles/76561199101268700/friends/add" target="_blank" rel="noopener noreferrer" aria-label="Добавить Danik_me17 в друзья Steam">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-9.7 12.4l5.3 2.2a3.6 3.6 0 0 1 3.8-.7l3.1-4.5v-.1a4.8 4.8 0 1 1 4.9 4.8h-.1l-4.5 3.1a3.6 3.6 0 0 1-6.8-.1l-4.8-2A10 10 0 1 0 12 2ZM8.7 20a2.2 2.2 0 1 0 1-4.3l1.6.7a2.2 2.2 0 0 1-1.6 4.1ZM19.3 8.5a2.9 2.9 0 1 0 0 5.8 2.9 2.9 0 0 0 0-5.8Z"/></svg></span>
+              <span class="social-text"><span class="social-name">Steam</span><span class="social-sub">Добавить в друзья</span></span><span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="social" href="https://discord.gg/gBT8jhJ23" target="_blank" rel="noopener noreferrer" aria-label="Присоединиться к Discord-сообществу">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M19.8 5.1a18.1 18.1 0 0 0-4.4-1.4l-.5 1a16 16 0 0 0-5.8 0l-.5-1a18.1 18.1 0 0 0-4.4 1.4C1.4 9.1.6 13.1 1 17.1a18 18 0 0 0 5.4 2.7l1.2-1.9c-.7-.3-1.3-.6-1.9-1 .2-.2.3-.3.5-.4 3.7 1.8 7.9 1.8 11.6 0l.5.4c-.6.4-1.2.7-1.9 1l1.2 1.9a18 18 0 0 0 5.4-2.7c.5-4.7-.8-8.6-3.2-12Zm-12.2 10c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm8.8 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/></svg></span>
+              <span class="social-text"><span class="social-name">Discord</span><span class="social-sub">Моё сообщество</span></span><span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="social" href="https://www.instagram.com/danik_me17?psln=MXVwZm1jcGNrMzY5ZQ==" target="_blank" rel="noopener noreferrer" aria-label="Открыть Instagram danik_me17">
+              <span class="icon-box" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.4-2.8a1.2 1.2 0 1 1 0 2.4 1.2 1.2 0 0 1 0-2.4Z"/></svg></span>
+              <span class="social-text"><span class="social-name">Instagram</span><span class="social-sub">@danik_me17</span></span><span class="arrow" aria-hidden="true">↗</span>
+            </a>
+          </nav>
+          <div class="music-player" id="musicPlayer" aria-label="Фоновая музыка">
+            <div class="music-disc" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+            <div class="music-meta"><span class="music-title">Midnight Glow ♫</span><span class="music-sub">Original ambient · мягкое звучание</span></div>
+            <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false">♫ ВКЛ</button>
+          </div>
+          <div class="copy-area">
+            <button type="button" class="copy-btn" id="copyBtn" aria-label="Скопировать никнейм Danik_me17"><svg viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></svg> Скопировать ник: @Danik_me17</button>
+          </div>
+        </section>
+        <div class="below-card"><i></i>WELCOME TO MY WORLD<i></i></div>
+      </div>
+      <div class="footer">© 2026 DANIK_ME17 &nbsp; · &nbsp; MADE WITH ✦</div>
+    </main>
+  </div>
+  <audio id="ambientAudio" preload="none" loop src="./midnight-glow-original.mp3"></audio>
+  <div class="toast" id="toast" role="status" aria-live="polite">Ник скопирован ✦</div>
+  <script>
+    (() => {
+      const root=document.documentElement;
+      const entry=document.getElementById('entry');
+      const enterButton=document.getElementById('enterButton');
+      const copyBtn=document.getElementById('copyBtn');
+      const toast=document.getElementById('toast');
+      const ambientAudio=document.getElementById('ambientAudio');
+      const musicToggle=document.getElementById('musicToggle');
+      const musicPlayer=document.getElementById('musicPlayer');
+      ambientAudio.volume=0.23;
+      let toastTimeout;
+      function syncMusicUI(){
+        const playing=!ambientAudio.paused;
+        musicPlayer.classList.toggle('is-playing',playing);
+        musicToggle.textContent=playing?'Ⅱ ВЫКЛ':'♫ ВКЛ';
+        musicToggle.setAttribute('aria-pressed',String(playing));
+        musicToggle.setAttribute('aria-label',playing?'Выключить фоновую музыку':'Включить фоновую музыку');
+      }
+      function setMusic(play){
+        if(play){ambientAudio.play().then(syncMusicUI).catch(()=>{syncMusicUI();showToast('Музыка не включилась. Нажми ♫ ВКЛ');});}
+        else{ambientAudio.pause();syncMusicUI();}
+      }
+      const enter=()=>{if(root.classList.contains('entered'))return;root.classList.add('entered');entry.setAttribute('aria-hidden','true');entry.setAttribute('inert','');setMusic(true);};
+      entry.addEventListener('click',enter);
+      enterButton.addEventListener('click',e=>{e.stopPropagation();enter();});
+      document.addEventListener('keydown',e=>{if(!root.classList.contains('entered')&&(e.key==='Enter'||e.key===' ')){e.preventDefault();enter();}});
+      function showToast(message){toast.textContent=message;toast.classList.add('show');clearTimeout(toastTimeout);toastTimeout=setTimeout(()=>toast.classList.remove('show'),2400);}
+      async function copyText(text){try{await navigator.clipboard.writeText(text);return true;}catch(e){const t=document.createElement('textarea');t.value=text;t.style.position='fixed';t.style.left='-9999px';document.body.append(t);t.select();let worked=false;try{worked=document.execCommand('copy');}catch(err){}t.remove();return worked;}}
+      copyBtn.addEventListener('click',async()=>showToast(await copyText('@Danik_me17')?'Ник скопирован ✦':'Не удалось скопировать. Ник: @Danik_me17'));
+      musicToggle.addEventListener('click',()=>setMusic(ambientAudio.paused));
+      ambientAudio.addEventListener('play',syncMusicUI);
+      ambientAudio.addEventListener('pause',syncMusicUI);
+      ambientAudio.addEventListener('error',()=>showToast('Файл музыки не найден — загрузи MP3 рядом с index.html'));
+      syncMusicUI();
+      if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+        const canvas=document.getElementById('stars');const ctx=canvas.getContext('2d');
+        if(ctx){let w,h,stars=[],frame=0;const dpr=Math.min(window.devicePixelRatio||1,2);
+          function resize(){w=window.innerWidth;h=window.innerHeight;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);const count=Math.min(95,Math.max(25,Math.round(w*h/13500)));stars=Array.from({length:count},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.15+.2,a:Math.random()*.45+.1,phase:Math.random()*6.283}));}
+          let raf;function draw(){ctx.clearRect(0,0,w,h);frame+=.011;for(const s of stars){const a=s.a*(.72+.28*Math.sin(frame+s.phase));ctx.fillStyle=`rgba(160,244,244,${a})`;ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,Math.PI*2);ctx.fill();}raf=requestAnimationFrame(draw)}
+          resize();draw();window.addEventListener('resize',resize,{passive:true});document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(raf)}else{draw()}});
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
