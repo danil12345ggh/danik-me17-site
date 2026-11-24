@@ -1,0 +1,291 @@
+const SITE_ORIGIN = "https://danil12345ggh.github.io";
+
+const DEFAULT_LINKS = [
+  {
+    name: "Telegram",
+    url: "https://t.me/Danik_me17",
+    icon: "✈️"
+  },
+  {
+    name: "Steam",
+    url: "https://steamcommunity.com/profiles/76561199101268700/friends/add",
+    icon: "🎮"
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/danik_me17?psln=MXVwZm1jcGNrMzY5ZQ==",
+    icon: "📷"
+  }
+];
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    const origin = request.headers.get("Origin") || "";
+
+    const cors = {
+      "Access-Control-Allow-Origin": SITE_ORIGIN,
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type",
+      "Vary": "Origin"
+    };
+
+    if (request.method === "OPTIONS") {
+      return new Response(null, { headers: cors });
+    }
+
+    if (url.pathname === "/api/links" && request.method === "GET") {
+      const saved = await env.LINKS.get("links", "json");
+      return Response.json(saved || DEFAULT_LINKS, {
+        headers: { ...cors, "Cache-Control": "no-store" }
+      });
+    }
+
+    if (url.pathname === "/admin") {
+      if (!(await verifyAccess(request, env))) {
+        return new Response("Доступ запрещён. Войдите через Cloudflare Access.", {
+          status: 403
+        });
+      }
+
+      return new Response(ADMIN_HTML, {
+        headers: { "Content-Type": "text/html; charset=utf-8" }
+      });
+    }
+
+    if (url.pathname === "/api/admin/links" && request.method === "POST") {
+      if (!(await verifyAccess(request, env))) {
+        return Response.json({ error: "Доступ запрещён" }, {
+          status: 403,
+          headers: cors
+        });
+      }
+
+      let links;
+      try {
+        links = await request.json();
+      } catch {
+        return Response.json({ error: "Некорректный JSON" }, {
+          status: 400,
+          headers: cors
+        });
+      }
+
+      if (!Array.isArray(links) || links.length > 30) {
+        return Response.json({ error: "Проверь список ссылок" }, {
+          status: 400,
+          headers: cors
+        });
+      }
+
+      const cleanLinks = [];
+
+      for (const item of links) {
+        if (
+          !item ||
+          typeof item.name !== "string" ||
+          typeof item.url !== "string" ||
+          typeof item.icon !== "string"
+        ) {
+          return Response.json({ error: "Заполни название, ссылку и значок" }, {
+            status: 400,
+            headers: cors
+          });
+        }
+
+        let parsed;
+        try {
+          parsed = new URL(item.url);
+        } catch {
+          return Response.json({ error: "Одна из ссылок указана неверно" }, {
+            status: 400,
+            headers: cors
+          });
+        }
+
+        if (parsed.protocol !== "https:") {
+          return Response.json({ error: "Разрешены только HTTPS-ссылки" }, {
+            status: 400,
+            headers: cors
+          });
+        }
+
+        cleanLinks.push({
+          name: item.name.trim().slice(0, 40),
+          url: parsed.href,
+          icon: item.icon.trim().slice(0, 8)
+        });
+      }
+
+      await env.LINKS.put("links", JSON.stringify(cleanLinks));
+
+      return Response.json({ success: true }, { headers: cors });
+    }
+
+    return new Response("Not found", { status: 404 });
+  }
+};
+
+async function verifyAccess(request, env) {
+  try {
+    const token = request.headers.get("CF-Access-Jwt-Assertion");
+    if (!token) return false;
+
+    const parts = token.split(".");
+    if (parts.length !== 3) return false;
+
+    const decode = (value) => {
+      const normalized = value.replace(/-/g, "+").replace(/_/g, "/");
+      return JSON.parse(atob(normalized));
+    };
+
+    const header = decode(parts[0]);
+    const claims = decode(parts[1]);
+
+    if (header.alg !== "RS256" || !header.kid) return false;
+
+    const issuer = `https://${env.ACCESS_TEAM_DOMAIN}`;
+    if (claims.iss !== issuer) return false;
+    if (claims.exp <= Math.floor(Date.now() / 1000)) return false;
+    if (claims.nbf && claims.nbf > Math.floor(Date.now() / 1000)) return false;
+
+    const audiences = Array.isArray(claims.aud) ? claims.aud : [claims.aud];
+    if (!audiences.includes(env.ACCESS_AUD)) return false;
+    if (claims.email?.toLowerCase() !== env.ADMIN_EMAIL.toLowerCase()) return false;
+
+    const response = await fetch(`${issuer}/cdn-cgi/access/certs`);
+    if (!response.ok) return false;
+
+    const certs = await response.json();
+    const jwk = certs.keys.find(key => key.kid === header.kid);
+    if (!jwk) return false;
+
+    const publicKey = await crypto.subtle.importKey(
+      "jwk",
+      jwk,
+      { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" },
+      false,
+      ["verify"]
+    );
+
+    const encoder = new TextEncoder();
+    const data = encoder.encode(`${parts[0]}.${parts[1]}`);
+    const signatureString = parts[2].replace(/-/g, "+").replace(/_/g, "/");
+    const signature = Uint8Array.from(
+      atob(signatureString),
+      character => character.charCodeAt(0)
+    );
+
+    return await crypto.subtle.verify(
+      "RSASSA-PKCS1-v1_5",
+      publicKey,
+      signature,
+      data
+    );
+  } catch {
+    return false;
+  }
+}
+
+const ADMIN_HTML = `<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Danik — редактор ссылок</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;padding:24px;background:#090d12;color:#e9f5f5;font-family:Arial,sans-serif}
+main{max-width:720px;margin:auto}
+h1{color:#55e0d0}
+p{color:#9aabad}
+.item{display:grid;grid-template-columns:65px 1fr 2fr 45px;gap:8px;margin:12px 0}
+input{min-width:0;padding:12px;border:1px solid #29434a;border-radius:9px;background:#111b22;color:white}
+button{padding:12px;border:0;border-radius:9px;background:#35cdbd;color:#061112;font-weight:bold}
+.remove{background:#542b35;color:white}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+#status{margin-top:16px;color:#55e0d0}
+@media(max-width:520px){.item{grid-template-columns:50px 1fr 42px}.item input:nth-child(3){grid-column:1/3}.item button{grid-column:3;grid-row:1/3}}
+</style>
+</head>
+<body>
+<main>
+<h1>Danik — ссылки</h1>
+<p>Добавляй, изменяй или удаляй ссылки. Изменения появятся на сайте после сохранения.</p>
+<div id="list"></div>
+<div class="actions">
+<button id="add">＋ Добавить ссылку</button>
+<button id="save">Сохранить изменения</button>
+</div>
+<div id="status"></div>
+</main>
+<script>
+const list = document.getElementById("list");
+const status = document.getElementById("status");
+
+function addRow(item = {icon:"🔗",name:"",url:""}) {
+  const row = document.createElement("div");
+  row.className = "item";
+  for (const [key, placeholder] of [
+    ["icon","Значок"],["name","Название"],["url","https://..."]
+  ]) {
+    const input = document.createElement("input");
+    input.value = item[key] || "";
+    input.placeholder = placeholder;
+    input.dataset.key = key;
+    row.appendChild(input);
+  }
+  const remove = document.createElement("button");
+  remove.className = "remove";
+  remove.textContent = "×";
+  remove.type = "button";
+  remove.onclick = () => row.remove();
+  row.appendChild(remove);
+  list.appendChild(row);
+}
+
+async function load() {
+  try {
+    const response = await fetch("/api/links");
+    if (!response.ok) throw new Error();
+    const links = await response.json();
+    links.forEach(addRow);
+  } catch {
+    status.textContent = "Не удалось загрузить ссылки.";
+  }
+}
+
+document.getElementById("add").onclick = () => addRow();
+
+document.getElementById("save").onclick = async () => {
+  const links = [...list.querySelectorAll(".item")].map(row => {
+    const item = {};
+    row.querySelectorAll("input").forEach(input => {
+      item[input.dataset.key] = input.value.trim();
+    });
+    return item;
+  });
+
+  if (links.some(item => !item.name || !item.url || !item.icon)) {
+    status.textContent = "Заполни все поля или удали пустую строку.";
+    return;
+  }
+
+  status.textContent = "Сохраняю...";
+  try {
+    const response = await fetch("/api/admin/links", {
+      method: "POST",
+      headers: {"Content-Type":"application/json"},
+      body: JSON.stringify(links)
+    });
+    if (!response.ok) throw new Error();
+    status.textContent = "Ссылки успешно сохранены!";
+  } catch {
+    status.textContent = "Не удалось сохранить. Проверь авторизацию и настройки.";
+  }
+};
+
+load();
+</script>
+</body>
+</html>`;
